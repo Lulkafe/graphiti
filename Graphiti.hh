@@ -120,6 +120,24 @@ public:
         window->focus(shell);
     }
 
+    virtual void createTitle()
+    {
+        auto window = static_cast<GLWindow*>(windows().active());
+
+        auto title = new TextArea();
+        title->print("OpenGraphiti");
+        title->setFontFactor(2.0);
+        title->style().Align = Document::Style::LEFT;
+		title->style().Left = Document::Length(Document::Length::PIXELS, 20);
+		title->style().Top = Document::Length(Document::Length::PIXELS, -1380);
+		title->style().Near = Document::Length(Document::Length::PIXELS, 1.0);
+		title->style().Width = Document::Length(Document::Length::PIXELS, 400);
+		title->style().Height = Document::Length(Document::Length::PIXELS, 125);
+	    title->style().BackgroundColor = glm::vec4(BLACK, 0.0);
+		window->body().addElement(title);
+
+    }
+
     virtual void createLogo()
     {
         auto window = static_cast<GLWindow*>(windows().active());
@@ -276,6 +294,11 @@ public:
         {
             createShell();
             return true;
+        }
+        else if (sname == "title")
+        {
+        	createTitle();
+        	return true;
         }
         else if (sname == "timeline")
         {
