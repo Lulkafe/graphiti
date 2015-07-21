@@ -262,6 +262,7 @@ class Console(object):
 		self.log(s)
 
 	def execute(self, command):
+		print(command)
 		args = command.split()
 		if 'scripts' in self.context and args[0] in self.context['scripts']:
 			self.context['scripts'][args[0]].run(args)
