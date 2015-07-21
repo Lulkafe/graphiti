@@ -1,8 +1,6 @@
 #pragma once
 
 #include <raindance/Core/Interface/Window.hh>
-#include <raindance/Core/Interface/Documents/PrintVisitor.hh>
-
 #include <graphiti/Entities/MVC.hh>
 #include <graphiti/Entities/Root.hh>
 
@@ -15,7 +13,7 @@ public:
     };
 
     GLWindow(Settings* settings, Root* parent = NULL)
-    : rd::Window(settings), m_pVisitor(m_Context)
+    : rd::Window(settings)
     {
         m_ActiveVisualizer = 0;
         m_Parent = parent;
@@ -31,7 +29,6 @@ public:
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         body().draw(context);
-        body().accept(&m_pVisitor);
     }
 
     virtual void idle(Context* context)
@@ -71,7 +68,4 @@ private:
     Root* m_Parent;
     std::vector<EntityVisualizer*> m_Visualizers;
     int m_ActiveVisualizer;
-
-
-    PrintVisitor m_pVisitor;
 };

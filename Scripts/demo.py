@@ -14,8 +14,6 @@ def start():
     og.create_visualizer("space")
     og.create_visualizer("shell")
     og.create_visualizer("logo")
-    og.create_visualizer("title")
-    og.create_visualizer("checkbox")
 
     # ----- Console Callback ------
 
