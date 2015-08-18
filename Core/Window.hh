@@ -46,6 +46,10 @@ public:
             Geometry::getMetrics().reset();
             ResourceManager::getInstance().dump();
         }
+        else if (key == GLFW_KEY_ENTER && action == GLFW_RELEASE)
+        {
+            print();
+        }
         else
         { 
             body().onKey(key, scancode, action, mods);
