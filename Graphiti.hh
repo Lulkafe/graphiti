@@ -14,6 +14,7 @@
 
 #include <raindance/Core/Interface/Documents/Timeline.hh>
 #include <raindance/Core/Interface/Documents/CheckBox.hh>
+#include <raindance/Core/Interface/Documents/Slider.hh>
 
 #include <graphiti/Visualizers/Space/SpaceVisualizer.hh>
 #include <graphiti/Visualizers/Network/NetworkVisualizer.hh>
@@ -185,9 +186,26 @@ public:
         doc->style().Left = Document::Length(Document::Length::PIXELS, -10);
         doc->style().Top = Document::Length(Document::Length::PIXELS, -100);
         doc->style().Near = Document::Length(Document::Length::PIXELS, 1.0);
-        doc->style().Width = Document::Length(Document::Length::PIXELS, 32);
-        doc->style().Height = Document::Length(Document::Length::PIXELS, 32);
+        doc->style().Width = Document::Length(Document::Length::PIXELS, 16);
+        doc->style().Height = Document::Length(Document::Length::PIXELS, 16);
         doc->style().BackgroundColor = glm::vec4(HEX_COLOR(0x808080), 0.90);
+
+        window->body().addElement(doc);
+    }
+
+    virtual void createSlider()
+    {
+        auto window = static_cast<GLWindow*>(windows().active());
+
+        auto doc = new Slider();
+        doc->style().Align = Document::Style::CENTER;
+        doc->style().Left = Document::Length(Document::Length::PIXELS, -10);
+        doc->style().Top = Document::Length(Document::Length::PIXELS, -300);
+        doc->style().Near = Document::Length(Document::Length::PIXELS, 1.0);
+        doc->style().Width = Document::Length(Document::Length::PIXELS, 200);
+        doc->style().Height = Document::Length(Document::Length::PIXELS, 20);
+        doc->style().BackgroundColor = glm::vec4(HEX_COLOR(0x808080), 0.90);
+
         window->body().addElement(doc);
     }
 
@@ -324,6 +342,11 @@ public:
         {
         	createCheckBox();
         	return true;
+        }
+        else if (sname == "slider")
+        {
+            createSlider();
+            return true;
         }
         else if (sname == "timeseries")
         {
