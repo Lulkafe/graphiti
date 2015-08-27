@@ -13,8 +13,6 @@
 #include <graphiti/Core/Shell.hh>
 
 #include <raindance/Core/Interface/Documents/Timeline.hh>
-#include <raindance/Core/Interface/Documents/CheckBox.hh>
-#include <raindance/Core/Interface/Documents/Slider.hh>
 
 #include <graphiti/Visualizers/Space/SpaceVisualizer.hh>
 #include <graphiti/Visualizers/Network/NetworkVisualizer.hh>
@@ -122,23 +120,6 @@ public:
         window->focus(shell);
     }
 
-    virtual void createTitle()
-    {
-        auto window = static_cast<GLWindow*>(windows().active());
-
-        auto title = new TextArea();
-        title->print("OpenGraphiti");
-        title->setFontFactor(2.0);
-        title->style().Align = Document::Style::LEFT;
-        title->style().Left = Document::Length(Document::Length::PIXELS, 20);
-        title->style().Top = Document::Length(Document::Length::PIXELS, -200);
-        title->style().Near = Document::Length(Document::Length::PIXELS, 1.0);
-        title->style().Width = Document::Length(Document::Length::PIXELS, 400);
-        title->style().Height = Document::Length(Document::Length::PIXELS, 125);
-        title->style().BackgroundColor = glm::vec4(BLACK, 0.0);
-        window->body().addElement(title);
-    }
-
     virtual void createLogo()
     {
         auto window = static_cast<GLWindow*>(windows().active());
@@ -173,38 +154,6 @@ public:
         // doc->bindTrack(sequencer.track("command"));
         // doc->bind(sequencer.track("command")->clock());
         // context()->clock().bind(&sequencer.track("command")->clock());
-
-        window->body().addElement(doc);
-    }
-
-    virtual void createCheckBox()
-    {
-        auto window = static_cast<GLWindow*>(windows().active());
-
-        auto doc = new CheckBox();
-        doc->style().Align = Document::Style::CENTER;
-        doc->style().Left = Document::Length(Document::Length::PIXELS, -10);
-        doc->style().Top = Document::Length(Document::Length::PIXELS, -100);
-        doc->style().Near = Document::Length(Document::Length::PIXELS, 1.0);
-        doc->style().Width = Document::Length(Document::Length::PIXELS, 16);
-        doc->style().Height = Document::Length(Document::Length::PIXELS, 16);
-        doc->style().BackgroundColor = glm::vec4(HEX_COLOR(0x808080), 0.90);
-
-        window->body().addElement(doc);
-    }
-
-    virtual void createSlider()
-    {
-        auto window = static_cast<GLWindow*>(windows().active());
-
-        auto doc = new Slider();
-        doc->style().Align = Document::Style::CENTER;
-        doc->style().Left = Document::Length(Document::Length::PIXELS, -10);
-        doc->style().Top = Document::Length(Document::Length::PIXELS, -300);
-        doc->style().Near = Document::Length(Document::Length::PIXELS, 1.0);
-        doc->style().Width = Document::Length(Document::Length::PIXELS, 200);
-        doc->style().Height = Document::Length(Document::Length::PIXELS, 20);
-        doc->style().BackgroundColor = glm::vec4(HEX_COLOR(0x808080), 0.90);
 
         window->body().addElement(doc);
     }
@@ -328,24 +277,9 @@ public:
             createShell();
             return true;
         }
-        else if (sname == "title")
-        {
-        	createTitle();
-        	return true;
-        }
         else if (sname == "timeline")
         {
             createTimeline();
-            return true;
-        }
-        else if (sname == "checkbox")
-        {
-        	createCheckBox();
-        	return true;
-        }
-        else if (sname == "slider")
-        {
-            createSlider();
             return true;
         }
         else if (sname == "timeseries")
